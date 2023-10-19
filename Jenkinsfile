@@ -35,6 +35,15 @@ pipeline {
                 sh 'docker push arman23/bankingpro:1.0'
             }
         }
+        stage ('Configure My Servers with Terraform, Ansible and Deploying '){
+            steps {
+                dir('prodserver'){
+                sh 'sudo chmod 600 awsdevopskey.pem'
+                sh 'terraform init'
+                sh 'terraform validate'
+                sh 'terraform apply --auto-approve'
+                }
+            }
 
     }
 }
